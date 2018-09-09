@@ -1,14 +1,14 @@
 package nu.nerd.beastmaster.commands;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.command.CommandSender;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
-
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.command.CommandSender;
 
 // ----------------------------------------------------------------------------
 /**
@@ -149,17 +149,7 @@ public class Commands {
      * @return the Material
      */
     public static Material parseMaterial(CommandSender sender, String materialArg) {
-        Material material;
-        try {
-            // Note: number out of range => null.
-            material = Material.getMaterial(Integer.parseInt(materialArg));
-        } catch (NumberFormatException ex) {
-            try {
-                material = Material.valueOf(materialArg.toUpperCase());
-            } catch (IllegalArgumentException ex2) {
-                material = null;
-            }
-        }
+        Material material = Material.getMaterial(materialArg.toUpperCase());
         if (material == null) {
             sender.sendMessage(ChatColor.RED + materialArg + " is not a valid material name or number.");
         }
